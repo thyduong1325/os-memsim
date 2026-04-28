@@ -26,6 +26,10 @@ class PageTable {
 private:
     int _page_size;
     std::map<std::string, int> _table;
+    
+    // Added to track physical memory correctly
+    int _total_frames;
+    std::vector<bool> _used_frames;
 
     std::vector<std::string> sortedKeys();
 
@@ -36,8 +40,8 @@ public:
     void addEntry(uint32_t pid, int page_number);
     void removeEntry(uint32_t pid, int page_number);
     void removeAllEntries(uint32_t pid);
+    int getPageSize() const { return _page_size; }
     int getPhysicalAddress(uint32_t pid, uint32_t virtual_address);
-    int getNumFrames(uint32_t pid);
     void print();
 };
 
